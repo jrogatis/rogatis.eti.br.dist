@@ -43,6 +43,7 @@ if (_environment2.default.seedDB) {
 
 // Setup server
 var app = (0, _express2.default)();
+
 var server = _http2.default.createServer(app);
 var socketio = require('socket.io')(server, {
   serveClient: _environment2.default.env !== 'production',
