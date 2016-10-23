@@ -4,17 +4,12 @@
  * POST    /api/ContactForm              ->  create
 
  */
-
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.create = create;
-
-var _fastJsonPatch = require('fast-json-patch');
-
-var _fastJsonPatch2 = _interopRequireDefault(_fastJsonPatch);
 
 var _contactForm = require('./contactForm.model');
 
@@ -28,12 +23,16 @@ var _expressMailer = require('express-mailer');
 
 var _expressMailer2 = _interopRequireDefault(_expressMailer);
 
+var _path = require('path');
+
+var _path2 = _interopRequireDefault(_path);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express2.default)();
 
 _expressMailer2.default.extend(app, {
-  from: 'jrogatis@gmail.com',
+  from: 'Jean Philip de Rogatis <jrogatis@gmail.com>',
   host: 'smtp.gmail.com', // hostname
   secureConnection: true, // use SSL
   port: 465, // port for secure SMTP
@@ -44,34 +43,28 @@ _expressMailer2.default.extend(app, {
   }
 });
 
-app.set('views', __dirname + '/');
+app.set('views', __dirname + '/'); //path.resolve( __dirname, '/'));
 app.set('view engine', 'pug');
 
-function handleEntityNotFound(res) {
+function respondWithResult(res, statusCode) {
+  statusCode = statusCode || 200;
   return function (entity) {
-    if (!entity) {
-      res.status(404).end();
-      return null;
+    if (entity) {
+      return res.status(statusCode).json(entity);
     }
-    return entity;
+    return null;
   };
 }
 
-function handleError(res, statusCode) {
-  statusCode = statusCode || 500;
-  return function (err) {
-    res.status(statusCode).send(err);
-  };
-}
-
-function handleSendEmail(res, msg) {
+function handleSendEmail(res) {
+  console.log('path', __dirname);
   app.mailer.send({
     template: 'email',
     bcc: 'jrogatis@metaconexao.com.br'
   }, {
-    to: msg.email,
+    to: res.email,
     subject: 'Your contact with Jean', // REQUIRED.
-    message: msg.message
+    message: res.message
   }, function (err) {
     if (err) {
       // handle error
@@ -85,6 +78,6 @@ function handleSendEmail(res, msg) {
 
 // Creates a new ContactForm in the DB
 function create(req, res) {
-  return _contactForm2.default.create(req.body).then(handleSendEmail(res, req.body));
+  return _contactForm2.default.create(req.body).then(handleSendEmail(res));
 }
 //# sourceMappingURL=contactForm.controller.js.map
