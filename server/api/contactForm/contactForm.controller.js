@@ -23,10 +23,6 @@ var _expressMailer = require('express-mailer');
 
 var _expressMailer2 = _interopRequireDefault(_expressMailer);
 
-var _path = require('path');
-
-var _path2 = _interopRequireDefault(_path);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express2.default)();
@@ -46,15 +42,15 @@ _expressMailer2.default.extend(app, {
 app.set('views', __dirname + '/'); //path.resolve( __dirname, '/'));
 app.set('view engine', 'pug');
 
-function respondWithResult(res, statusCode) {
+/*function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
-  return function (entity) {
-    if (entity) {
+  return function(entity) {
+    if(entity) {
       return res.status(statusCode).json(entity);
     }
     return null;
   };
-}
+}*/
 
 function handleSendEmail(res) {
   console.log('path', __dirname);
