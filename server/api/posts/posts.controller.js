@@ -84,14 +84,16 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of Postss
+// Gets a list of Posts
 function index(req, res) {
   return _posts2.default.find().exec().then(respondWithResult(res)).catch(handleError(res));
 }
 
-// Gets a single Posts from the DB
+// Gets a single Posts from the DB from id or from slug...
 function show(req, res) {
-  return _posts2.default.findById(req.params.id).exec().then(handleEntityNotFound(res)).then(respondWithResult(res)).catch(handleError(res));
+  return _posts2.default.findById(req.params.id).exec().then(handleEntityNotFound(res)).then(respondWithResult(res)).catch(function (err) {
+    _posts2.default.findOne({ 'slug': req.params.id }).exec().then(handleEntityNotFound(res)).then(respondWithResult(res)).catch(handleError(res));
+  });
 }
 
 // Creates a new Posts in the DB
@@ -114,7 +116,6 @@ function patch(req, res) {
   }
   return _posts2.default.findById(req.params.id).exec().then(handleEntityNotFound(res)).then(patchUpdates(req.body)).then(respondWithResult(res)).catch(handleError(res));
 }
-
 // Deletes a Posts from the DB
 function destroy(req, res) {
   return _posts2.default.findById(req.params.id).exec().then(handleEntityNotFound(res)).then(removeEntity(res)).catch(handleError(res));

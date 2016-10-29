@@ -15,6 +15,7 @@ var PostsSchema = new _mongoose2.default.Schema({
   text: String,
   postImage: String,
   snipet: String,
+  slug: String,
   active: Boolean,
   coments: [{
     from: String,
