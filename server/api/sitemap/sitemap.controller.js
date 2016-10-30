@@ -21,7 +21,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var basicMap = {
   hostname: 'http://www.rogatis.eti.br',
-  cacheTime: 600000, // 600 sec cache period
+  cacheTime: 600000, // 600 sec cache peåriod
   urls: [{
     url: '/',
     changefreq: 'daily',
@@ -46,14 +46,15 @@ function sitemap(res) {
 
     var map = _sitemap2.default.createSitemap(basicMap);
     posts.map(function (post) {
-      map.add({ url: '/' + post.slug });
+      map.add({
+        url: '/' + post.slug
+      });
     });
     map.toXML(function (err, xml) {
       if (!err) {
-        console.log(xml);
+        console.log(err, xml);
       }
     });
-    console.log(map);
     return res.status(200).header('Content-Type', 'application/xml').send(map.toString());
   });
 }
