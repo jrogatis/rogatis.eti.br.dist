@@ -52,7 +52,6 @@ function patchUpdates(patches) {
     } catch (err) {
       return _promise2.default.reject(err);
     }
-
     return entity.save();
   };
 }

@@ -92,7 +92,7 @@ function index(req, res) {
 // Gets a single Posts from the DB from id or from slug...
 function show(req, res) {
   return _posts2.default.findById(req.params.id).exec().then(handleEntityNotFound(res)).then(respondWithResult(res)).catch(function (err) {
-    _posts2.default.findOne({ 'slug': req.params.id }).exec().then(handleEntityNotFound(res)).then(respondWithResult(res)).catch(handleError(res));
+    _posts2.default.findOne({ slug: req.params.id }).exec().then(handleEntityNotFound(res)).then(respondWithResult(res)).catch(handleError(res));
   });
 }
 

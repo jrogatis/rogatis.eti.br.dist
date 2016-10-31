@@ -43,7 +43,6 @@ var basicMap = {
 
 function sitemap(res) {
   _posts2.default.find().exec().then(function (posts) {
-
     var map = _sitemap2.default.createSitemap(basicMap);
     posts.map(function (post) {
       map.add({
