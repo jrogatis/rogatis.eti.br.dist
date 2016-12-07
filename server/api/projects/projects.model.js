@@ -16,7 +16,7 @@ var ProjectsSchema = new _mongoose2.default.Schema({
   desc: { type: 'String', required: true },
   imgUrl: { type: 'String', required: true },
   siteUrl: { type: 'String', required: true },
-  displayFront: { type: Boolean, required: true }
+  displayFront: { type: Boolean, required: false }
 });
 
 exports.default = _mongoose2.default.model('Projects', ProjectsSchema);
