@@ -98,7 +98,10 @@ function show(req, res) {
 
 // Creates a new Posts in the DB
 function create(req, res) {
-  return _posts2.default.create(req.body).then(respondWithResult(res, 201)).catch(handleError(res));
+  return _posts2.default.create(req.body).then(respondWithResult(res, 201)).catch(function (err) {
+    console.log(err);
+    handleError(res);
+  });
 }
 
 // Upserts the given Posts in the DB at the specified ID
