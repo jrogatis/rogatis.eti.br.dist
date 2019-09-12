@@ -50,7 +50,7 @@
     "morgan": "~1.7.0",
     "ng-file-upload": "^12.2.12",
     "ng-meta": "^1.0.0",
-    "ng-quill": "^1.5.3",
+    "ng-quill": "^2.0.3",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pug": "2.0.0-beta4",
